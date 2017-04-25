@@ -2,114 +2,173 @@
 <html lang="en">
 
 <head>
-
-<title>Best Train Scheduler NA</title>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Google Font -->
-
-<!-- Font Awesome Glyps -->
-<script src="https://use.fontawesome.com/a5863cd1b3.js"></script>
-<!-- Boostrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Week7 Train</title>
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="assets/js/moment.js"></script>
+    <style type="text/css">
+    #firstTitle {
+        background: green;
+        font-weight: bold;
+    }
+    
+    #secondTitle {
+        background: green;
+        font-weight: bold;
+    }
+    
+    #submit {
+        background: pink;
+    }
+    </style>
 </head>
 
 <body>
-
-<div class="container">
-	<!-- Title heading section -->
-	<div class="row">
-		<div class="col">
-			<div class="jumbotron jumbotron-fluid">
-			  <div class="container text-center">
-			    <h1 class="display-3">Employee Data Managment</h1>
-			    <p class="lead">A comprehensive Directory of Employee Billable Hours</p>
-			  </div>
-			</div>
-		</div>
-	</div>
-	<!-- Train schedule header -->
-	<div class="row">
-		<div class="col">
-			<h6 id="main-section-header" class=text-center>Current Employees</h6>					  
-		</div>
-	</div>
-	<!-- Train schedule main section -->
-	<div class="row text-center">
-		<div class="col-3">
-			<h5>Employee Name</h5>
-			<p id="employee-name-field"></p>
-		</div>
-  		<div class="col-2">
-  			<h5>Role</h5>
- 			<p id="role-field"></p>
-		</div>
-  		<div class="col-2">
-  			<h5>Start Date</h5>
-  			<p id="start-date-field"></p>
-		</div>
-  		<div class="col-2">
-  			<h5>Months Worked</h5>
-  			<p id="months-worded-field"></p>
-		</div>
-  		<div class="col-1">
-  		<h5>Monthly Rate</h5>
-  			<p id="monthly-rate-field"></p>
-		</div>
-		 <div class="col-2">
-  		<h5>Total Billed</h5>
-  			<p id="total-billed-field"></p>
-		</div>
-	</div>
-	<!-- Train Input Section -->
-	
-	<div class="row">
-		<div class="col-md-6 offset-md-3">
-			<h6 id="input-section-header" class=text-center>Add an employee</h6>					  
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 offset-md-3 text-center">
-			<form>
-			  <div class="form-group text-left">
-			    <label for="exampleInputEmail1"><span class="form-text">Employee Name</span></label>
-			    <input type="text" class="form-control" id="employee-name-input" aria-describedby="emailHelp" placeholder="Enter the name of the train here">
-			    <label for="exampleInputEmail1"><span class="form-text">Role</span></label>
-			    <input type="text" class="form-control" id="role-input" aria-describedby="emailHelp" placeholder="Enter your desitnation here">
-			    <label for="exampleInputEmail1"><span class="form-text">Start Date (DD/MM/YY - ex 01/01/89)</span></label>
-			    <input type="text" class="form-control" id="start-date-input" aria-describedby="emailHelp" placeholder="First train time">
-			    <label for="exampleInputEmail1"><span class="form-text">Monthly Rate</span></label>
-			    <input type="text" class="form-control" id="monthly-rate-input" aria-describedby="emailHelp" placeholder="Frequency">
-			  </div>
-			  <button id="submit-button" type="submit" class="btn btn-default btn-lg">Submit</button>
-			</form>
-		</div>
-
-	</div>
-
-</div> <!-- Container Fluid Div -->
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>Employee Data Management</h1>
+            <p class="lead">A comprehensive Directory of Employee Billable</p>
+        </div>
+        <div>
+            <h3 id="firstTitle">Current Employees</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td class="">Employee Name</td>
+                    <td class="">Role</td>
+                    <td class="">Start Date</td>
+                    <td class="">Monthly Rate ($)</td>
+                    <td class="">Months Worked</td>
+                    <td class="">Total Billed ($)</td>
+                </tr>
+            </table>
+            <div>
+                <h3 id="secondTitle">Add Employee</h3>
+                <form>
+                    <div class="form-group">
+                        <label>Employee Name</label>
+                        <input type="text" class="form-control" id="employeeName">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" class="form-control" id="role">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date(MM/DD/YY)</label>
+                        <input type="text" class="form-control" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Monthly Rate</label>
+                        <input type="text" class="form-control" id="monthlyRate">
+                    </div>
+                    <button type="submit" class="btn btn-default" id="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var config = {
+        apiKey: "AIzaSyCWJm5Ly_1e0_tlqWtBldbEm0JgXEh0A-Y",
+        authDomain: "codersbay-bbe5c.firebaseapp.com",
+        databaseURL: "https://codersbay-bbe5c.firebaseio.com",
+        projectId: "codersbay-bbe5c",
+        storageBucket: "codersbay-bbe5c.appspot.com",
+        messagingSenderId: "90435835650"
+    };
+    firebase.initializeApp(config);
 
 
+    var i=0;
+    var database = firebase.database();
+    $('#submit').on('click', function() {
+        event.preventDefault()
+        var name = $('#employeeName').val().trim();
+        var role = $('#role').val().trim();
+        var date = $('#startDate').val().trim();
+        var rate = $('#monthlyRate').val().trim();
+        var month = moment(date, 'MM/DD/YY').diff(moment(), "months");
+        var total = month*rate;
+        console.log(month);
+        console.log(total);
 
-<!-- Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        
+        $('#employeeName').val("");
+        $('#role').val("");
+        $('#startDate').val("");
+        $('#monthlyRate').val("");
+        /*       var a = $('<tr>');
+               a.append("<td>" + name + "</td>");
+               a.append("<td>" + role + "</td>");
+               a.append("<td>" + date + "</td>");
+               a.append("<td>" + rate + "</td>");
+               $('.table').append(a)*/
 
-<!-- JQuery -->
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        database.ref().push({
+            name: name,
+            //shortcut to set up the firebase variables if they have same variable names and keys.
+            role,
+            date,
+            rate,
+            month,
+            total
+        })
 
- <script src="assets/js/javascript.js"></script>
 
+    })
+
+    // Initialize Firebase
+
+
+    database.ref().on('child_added', function(snapshot) {
+        console.log(snapshot.val())
+
+        var a = $('<tr id='+i+'>');
+        a.append("<td>" + snapshot.val().name + "</td>");
+        a.append("<td>" + snapshot.val().role + "</td>");
+        a.append("<td>" + snapshot.val().date + "</td>");
+        a.append("<td>" + snapshot.val().rate + "</td>");
+        a.append("<td>" + snapshot.val().month + "</td>");
+        a.append("<td>" + snapshot.val().total + "</td>");
+        $('.table').append(a)
+        i++;
+    });
+
+
+    // database.ref().set({
+
+    // 	trainName:trainName,
+    // 	destination:destination,
+    // 	trainTime:trainTime,
+    // 	frequency:frequency
+    // });
+
+    // database.ref().on("value",function(train){
+    // 	  console.log(train.val());
+    //       console.log(train.val().trainName);
+    //       console.log(train.val().destination);
+    //       console.log(train.val().trainTime);
+    //       console.log(train.val().frequency);
+
+
+
+    // });
+
+
+    // })
+    </script>
 </body>
 
 </html>
